@@ -6,13 +6,11 @@ const Skeleton = () => {
 const render = () => {
   const skeletonHTML = `            
   <li class='skeleton-list none'>
-    <a href="#">
-      <div class="item-card">
-        <div class="item-thumbnail skeleton"></div>
-        <div class="item-title skeleton"></div>
-        <div class="item-score skeleton"></div>
-      </div>
-    </a>
+    <div class="item-card">
+      <div class="item-thumbnail skeleton"></div>
+      <div class="item-title skeleton"></div>
+      <div class="item-score skeleton"></div>
+    </div>
   </li>
   `.repeat(20);
 
