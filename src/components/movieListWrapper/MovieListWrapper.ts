@@ -52,6 +52,8 @@ class MovieListWrapper {
       case VIEW_TYPE.SEARCH:
         await this.updateSearchMovieList(showMoreButton);
         break;
+      default:
+        break;
     }
   }
 
