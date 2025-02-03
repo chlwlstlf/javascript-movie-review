@@ -4,22 +4,22 @@ import errorHandler from '../utils/errorHandler';
 const API_KEY = process.env.API_KEY;
 
 const ApiClient = {
-  async get(endpoint, queryParams = {}, headers = {}) {
+  get(endpoint, queryParams = {}, headers = {}) {
     const url = this.buildUrl(endpoint, queryParams);
     return this.request('GET', url, null, headers);
   },
 
-  async post(endpoint, body, headers = {}) {
+  post(endpoint, body, headers = {}) {
     const url = `${API.URL}${endpoint}`;
     return this.request('POST', url, body, headers);
   },
 
-  async put(endpoint, body, headers = {}) {
+  put(endpoint, body, headers = {}) {
     const url = `${API.URL}${endpoint}`;
     return this.request('PUT', url, body, headers);
   },
 
-  async delete(endpoint, headers = {}) {
+  delete(endpoint, headers = {}) {
     const url = `${API.URL}${endpoint}`;
     return this.request('DELETE', url, null, headers);
   },
