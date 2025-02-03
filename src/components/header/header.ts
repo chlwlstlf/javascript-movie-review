@@ -1,4 +1,6 @@
+import { BREAKPOINT } from '../../constants/constant';
 import logoPng from '../../images/logo.png';
+import { debounce } from '../../utils/eventUtils';
 
 interface Props {
   onLogoClick?: () => void;
@@ -46,7 +48,7 @@ const Header = ({ onLogoClick, inputSubmitHandle }: Props) => {
       });
     }
 
-    window.addEventListener('resize', () => {
+    const handleResize = debounce(() => {
       const screenWidth = window.innerWidth;
 
       searchBox.addEventListener('submit', event => {
@@ -55,13 +57,15 @@ const Header = ({ onLogoClick, inputSubmitHandle }: Props) => {
         const isSearchInputClosed = searchInput.classList.contains('closed');
         const searchInputValue = searchInput.value.trim();
 
-        if (screenWidth <= 767) {
+        if (screenWidth <= BREAKPOINT.MOBILE) {
           mobileSearchBox(isSearchInputClosed, searchInputValue);
         } else {
           defaultSearchBox(searchInputValue);
         }
       });
-    });
+    }, 300);
+
+    window.addEventListener('resize', handleResize);
 
     const mobileSearchBox = (isSearchInputClosed: boolean, searchInputValue: string) => {
       if (inputSubmitHandle) {
