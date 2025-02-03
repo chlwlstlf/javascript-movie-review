@@ -1,4 +1,3 @@
-// Import necessary dependencies and constants
 import { fetchPopularMovieList, fetchSearchMovieList } from '../../apis/getMovieData';
 import { SETTING, VIEW_TYPE } from '../../constants/constant';
 import setupIntersectionObserver from '../../utils/setupIntersectionObserver';
@@ -52,9 +51,11 @@ class MovieListWrapper {
           const result = await this.getMovieList();
 
           if (result) {
-            const [movies, totalPages] = result;
+            const {movies, totalPages} = result;
             view.hideSkeleton();
-            if (this.shouldStopObserving(movies, totalPages)) return;
+            if (this.shouldStopObserving(movies, totalPages)) {
+              return;
+            }
             view.renderMovieCard(movies);
             this.#isLoading = false;
             this.plusPage();

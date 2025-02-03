@@ -20,7 +20,8 @@ class MovieDetailModal extends Modal {
   }
 
   async renderMovieDetail() {
-    this.#movie = await fetchMovieDetail(this.#movieId);
+    const { movies } = await fetchMovieDetail(this.#movieId);
+    this.#movie = movies;
     this.#movie.userVote = this.getUserVote();
     const movieDetailContent = new MovieDetailContent(this.#movie);
     this.setContent(movieDetailContent.render());
