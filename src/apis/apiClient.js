@@ -9,7 +9,7 @@ const buildUrl = (endpoint, queryParams = {}) => {
     language: API.LANGUAGE,
     ...queryParams
   });
-  
+
   return `${API.URL}${endpoint}?${params}`;
 }
 
@@ -54,7 +54,7 @@ const ApiClient = {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(Number(response.status));
+        throw new Error(response.status);
       }
 
       return data;
