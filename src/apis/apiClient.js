@@ -3,24 +3,34 @@ import errorHandler from '../utils/errorHandler';
 
 const API_KEY = process.env.API_KEY;
 
+const buildUrl = (endpoint, queryParams = {}) => {
+  const params = new URLSearchParams({
+    api_key: API_KEY,
+    language: API.LANGUAGE,
+    ...queryParams
+  });
+  
+  return `${API.URL}${endpoint}?${params}`;
+}
+
 const ApiClient = {
   get(endpoint, queryParams = {}, headers = {}) {
-    const url = this.buildUrl(endpoint, queryParams);
+    const url = buildUrl(endpoint, queryParams);
     return this.request('GET', url, null, headers);
   },
 
-  post(endpoint, body, headers = {}) {
-    const url = `${API.URL}${endpoint}`;
+  post(endpoint, body, queryParams = {}, headers = {}) {
+    const url = buildUrl(endpoint, queryParams);
     return this.request('POST', url, body, headers);
   },
 
-  put(endpoint, body, headers = {}) {
-    const url = `${API.URL}${endpoint}`;
+  put(endpoint, body, queryParams = {}, headers = {}) {
+    const url = buildUrl(endpoint, queryParams);
     return this.request('PUT', url, body, headers);
   },
 
-  delete(endpoint, headers = {}) {
-    const url = `${API.URL}${endpoint}`;
+  delete(endpoint, queryParams = {}, headers = {}) {
+    const url = buildUrl(endpoint, queryParams);
     return this.request('DELETE', url, null, headers);
   },
 
@@ -53,16 +63,6 @@ const ApiClient = {
       throw error;
     }
   },
-
-  buildUrl(endpoint, queryParams = {}) {
-    const params = new URLSearchParams({
-      api_key: API_KEY,
-      language: API.LANGUAGE,
-      ...queryParams
-    });
-
-    return `${API.URL}${endpoint}?${params}`;
-  }
 };
 
 export default ApiClient;
