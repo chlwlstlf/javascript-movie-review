@@ -1,6 +1,6 @@
 header {
   position: fixed;
-  width: 100vw;
+  width: 100%;
   height: 72px;
   background-color: #222;
   display: flex;
@@ -8,7 +8,6 @@ header {
   align-items: center;
   padding: 0 32px;
   border-bottom: 1px solid white;
-  margin-bottom: 48px;
   cursor: pointer;
   overflow: auto;
 }
@@ -45,11 +44,7 @@ header {
 
 /* mobile 규격 */
 @media screen and (max-width: 767px) {
-  .logo.closed,
-  .search-input.closed {
-    display: none;
-  }
   .search-input {
-    width: calc(100vw - 105px);
+    width: calc(100vw - 110px);
   }
 }
