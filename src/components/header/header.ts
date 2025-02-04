@@ -14,15 +14,14 @@ const Header = (props: Props) => {
     return isMobile ? HeaderMobile(props) : HeaderDesktop(props);
   };
 
-  window.addEventListener(
-    'resize',
-    debounce(() => {
-      const header = document.querySelector('.header');
-      if (header) {
-        header.replaceWith(render());
-      }
-    }, 300),
-  );
+  const handleResize = () => {
+    const header = document.querySelector('.header');
+    if (header) {
+      header.replaceWith(render());
+    }
+  };
+
+  window.addEventListener('resize', debounce(handleResize, 300));
 
   return render();
 };
