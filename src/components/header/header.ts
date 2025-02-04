@@ -16,9 +16,8 @@ const Header = (props: Props) => {
 
   const handleResize = () => {
     const header = document.querySelector('.header');
-    if (header) {
-      header.replaceWith(render());
-    }
+    if (!header) return;
+    header.replaceWith(render());
   };
 
   window.addEventListener('resize', debounce(handleResize, 300));
