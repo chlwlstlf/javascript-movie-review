@@ -26,17 +26,11 @@ const HeaderMobile = ({ onLogoClick, inputSubmitHandle }: Props) => {
     searchInput.style.display = 'none';
 
     const searchButton = document.createElement('button');
-    searchButton.type = 'submit';
+    searchButton.type = 'button';
     searchButton.className = 'search-button';
     searchButton.textContent = '검색';
-    searchButton.style.display = 'none';
 
-    const mobileSearchButton = document.createElement('button');
-    mobileSearchButton.type = 'button';
-    mobileSearchButton.className = 'search-button';
-    mobileSearchButton.textContent = '돋보기';
-
-    searchBox.append(searchInput, searchButton, mobileSearchButton);
+    searchBox.append(searchInput, searchButton);
     header.append(logo, searchBox);
 
     // 헤더 클릭 시 스크롤 상단으로 이동
@@ -55,16 +49,15 @@ const HeaderMobile = ({ onLogoClick, inputSubmitHandle }: Props) => {
     }
 
     // 모바일 돋보기 버튼 클릭 이벤트
-    mobileSearchButton.addEventListener('click', () => {
+    searchButton.addEventListener('click', () => {
+      if (searchButton.type === 'submit') return;
+
       const isInputVisible = searchInput.style.display === 'block';
 
       if (isInputVisible) {
-        searchInput.style.display = 'none';
-        mobileSearchButton.style.display = 'block';
-        logo.style.display = 'block';
+        hideSearchInput();
       } else {
-        searchInput.style.display = 'block';
-        logo.style.display = 'none';
+        showSearchInput();
         searchInput.focus();
       }
     });
@@ -72,28 +65,37 @@ const HeaderMobile = ({ onLogoClick, inputSubmitHandle }: Props) => {
     // 입력값에 따른 버튼 상태 전환
     searchInput.addEventListener('input', () => {
       const searchInputValue = searchInput.value.trim();
-
-      if (searchInputValue === '') {
-        searchButton.style.display = 'none';
-        mobileSearchButton.style.display = 'block';
-      } else {
-        searchButton.style.display = 'block';
-        mobileSearchButton.style.display = 'none';
-      }
+      toggleSearchButton(searchInputValue === '' ? 'button' : 'submit');
     });
 
+    // 검색 버튼 클릭 시 검색 처리
     searchBox.addEventListener('submit', event => {
+      console.log(searchButton.type);
       event.preventDefault();
       const searchInputValue = searchInput.value.trim();
 
       if (searchInputValue && inputSubmitHandle) {
         inputSubmitHandle(searchInputValue);
-        searchInput.style.display = 'none';
-        searchButton.style.display = 'none';
-        mobileSearchButton.style.display = 'block';
-        logo.style.display = 'block';
+        setTimeout(() => {
+          hideSearchInput();
+          toggleSearchButton('button');
+        }, 0);
       }
     });
+
+    const showSearchInput = () => {
+      searchInput.style.display = 'block';
+      logo.style.display = 'none';
+    };
+
+    const hideSearchInput = () => {
+      searchInput.style.display = 'none';
+      logo.style.display = 'block';
+    };
+
+    const toggleSearchButton = (type: 'button' | 'submit' | 'reset') => {
+      searchButton.type = type;
+    };
 
     return header;
   };
