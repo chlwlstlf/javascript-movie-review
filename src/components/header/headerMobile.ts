@@ -7,8 +7,7 @@ interface Props {
 
 const HeaderMobile = ({ onLogoClick, inputSubmitHandle }: Props) => {
   const render = () => {
-    const header = document.createElement('header');
-    header.className = 'header';
+    const fragment = document.createDocumentFragment();
 
     const logo = document.createElement('h1');
     logo.className = 'logo';
@@ -31,14 +30,7 @@ const HeaderMobile = ({ onLogoClick, inputSubmitHandle }: Props) => {
     searchButton.textContent = '검색';
 
     searchBox.append(searchInput, searchButton);
-    header.append(logo, searchBox);
-
-    // 헤더 클릭 시 스크롤 상단으로 이동
-    header.onclick = event => {
-      if ((event.target as HTMLElement).tagName === 'HEADER') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    };
+    fragment.append(logo, searchBox);
 
     // 로고 클릭 시 검색창 초기화 및 클릭 이벤트 처리
     if (onLogoClick) {
@@ -97,7 +89,7 @@ const HeaderMobile = ({ onLogoClick, inputSubmitHandle }: Props) => {
       searchButton.type = type;
     };
 
-    return header;
+    return fragment;
   };
 
   return render();
