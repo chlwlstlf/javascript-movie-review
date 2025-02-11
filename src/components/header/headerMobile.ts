@@ -62,16 +62,13 @@ const HeaderMobile = ({ onLogoClick, inputSubmitHandle }: Props) => {
 
     // 검색 버튼 클릭 시 검색 처리
     searchBox.addEventListener('submit', event => {
-      console.log(searchButton.type);
       event.preventDefault();
       const searchInputValue = searchInput.value.trim();
 
       if (searchInputValue && inputSubmitHandle) {
         inputSubmitHandle(searchInputValue);
-        setTimeout(() => {
-          hideSearchInput();
-          toggleSearchButton('button');
-        }, 0);
+        hideSearchInput();
+        toggleSearchButton('button');
       }
     });
 

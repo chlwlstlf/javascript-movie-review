@@ -21,27 +21,25 @@ const Header = (props: Props) => {
     }
   };
 
-  const render = () => {
+  const isMobile = (viewport: number) => getViewportType(viewport) === 'MOBILE';
+
+  const render = (width: number) => {
     header.innerHTML = '';
-    const content = getViewportType(window.innerWidth) === 'MOBILE' ? HeaderMobile(props) : HeaderDesktop(props);
+    const content = isMobile(width) ? HeaderMobile(props) : HeaderDesktop(props);
     header.appendChild(content);
   };
 
-  const handleTrigger = (prevViewport: number, currentViewport: number) => {
-    return (
-      (getViewportType(prevViewport) === 'MOBILE' && getViewportType(currentViewport) !== 'MOBILE') ||
-      (getViewportType(prevViewport) !== 'MOBILE' && getViewportType(currentViewport) === 'MOBILE')
-    );
+  const handleTrigger = (prev: number, current: number) => {
+    return isMobile(prev) != isMobile(current);
   };
 
-  const handleResize = debounce((currentViewport: number) => {
-    console.log('헤더 리렌더링', getViewportType(currentViewport));
-    render();
+  const handleResize = debounce((current: number) => {
+    render(current);
   }, 300);
 
   viewportManager.subscribe({ trigger: handleTrigger, callback: handleResize });
 
-  render();
+  render(window.innerWidth);
 
   return header;
 };

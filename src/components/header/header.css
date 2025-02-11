@@ -45,6 +45,7 @@
 /* mobile 규격 */
 @media screen and (max-width: 767px) {
   .search-input {
+    display: none;
     width: calc(100vw - 110px);
   }
 }
