@@ -3,10 +3,7 @@ class ViewportManager {
     this.listeners = new Set();
     this.prevViewport = window.innerWidth;
     this.resizeHandler = this.notifyListeners.bind(this);
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('resize', this.resizeHandler);
-    }
+    window.addEventListener('resize', this.resizeHandler);
   }
 
   /**
