@@ -39,7 +39,7 @@ class MovieDetailContent {
 
   createTitle() {
     const title = document.createElement('h3');
-    title.className = 'detail-title hidden';
+    title.className = 'detail-title';
     title.textContent = this.#movie.title;
 
     const closeButton = this.createCloseButton();
@@ -63,7 +63,7 @@ class MovieDetailContent {
 
   createSubDetail() {
     const subDetail = document.createElement('div');
-    subDetail.className = 'sub-detail hidden';
+    subDetail.className = 'sub-detail';
 
     const thumbnail = this.createThumbnail();
     const description = this.createDescription();
@@ -190,9 +190,9 @@ class MovieDetailContent {
 
     if (!detailLoading || !title || !subDetail) return;
 
+    detailLoading.style.display = 'none';
     title.style.display = 'flex';
     subDetail.style.display = 'flex';
-    detailLoading.style.display = 'none';
   }
 }
 

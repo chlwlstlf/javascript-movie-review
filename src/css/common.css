@@ -6,6 +6,21 @@ body {
   font-size: 14px;
   background-color: #222222;
   color: #fff;
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #777777;
+  border-radius: 100px;
+}
+
+#app {
+  padding-bottom: 48px;
 }
 
 a {
@@ -14,11 +29,8 @@ a {
 }
 
 button {
+  padding: 0;
   cursor: pointer;
-}
-
-#app {
-  padding-bottom: 48px;
 }
 
 *:focus {
